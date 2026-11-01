@@ -1,0 +1,44 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect your EZVIZ account",
+        "description": "Use the e-mail and password of your EZVIZ app account. Only the session tokens are stored, not the password.",
+        "data": {
+          "username": "Email",
+          "password": "Password",
+          "url": "API server"
+        },
+        "data_description": {
+          "url": "Leave the default for Europe. The region is detected automatically at login."
+        }
+      },
+      "mfa": {
+        "title": "Verification code",
+        "description": "EZVIZ sent you a verification code. Enter it to finish.",
+        "data": {
+          "code": "Verification code"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Sign in again",
+        "description": "The session for {username} expired. Enter the password again.",
+        "data": {
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect",
+      "invalid_auth": "Invalid authentication",
+      "invalid_host": "The API server address is not valid.",
+      "invalid_code": "The verification code is not valid.",
+      "unknown": "Unexpected error"
+    },
+    "abort": {
+      "already_configured": "Account is already configured",
+      "reauth_successful": "Re-authentication was successful",
+      "unknown": "Unexpected error"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Collega il tuo account EZVIZ",
+        "description": "Usa email e password dell'account dell'app EZVIZ. Vengono salvati solo i token di sessione, non la password.",
+        "data": {
+          "username": "Email",
+          "password": "Password",
+          "url": "Server API"
+        },
+        "data_description": {
+          "url": "Lascia il valore predefinito per l'Europa. La regione viene rilevata automaticamente al login."
+        }
+      },
+      "mfa": {
+        "title": "Codice di verifica",
+        "description": "EZVIZ ti ha inviato un codice di verifica. Inseriscilo per completare.",
+        "data": {
+          "code": "Codice di verifica"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Accedi di nuovo",
+        "description": "La sessione di {username} è scaduta. Inserisci di nuovo la password.",
+        "data": {
+          "password": "Password"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Impossibile connettersi",
+      "invalid_auth": "Autenticazione non valida",
+      "invalid_host": "L'indirizzo del server API non è valido.",
+      "invalid_code": "Il codice di verifica non è valido.",
+      "unknown": "Errore imprevisto"
+    },
+    "abort": {
+      "already_configured": "L'account è già configurato",
+      "reauth_successful": "Riautenticazione riuscita",
+      "unknown": "Errore imprevisto"
+    }
+  }
+}

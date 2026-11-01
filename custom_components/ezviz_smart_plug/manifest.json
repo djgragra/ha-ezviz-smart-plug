@@ -1,0 +1,12 @@
+{
+  "domain": "ezviz_smart_plug",
+  "name": "EZVIZ Smart Plug",
+  "codeowners": ["@djgragra"],
+  "config_flow": true,
+  "documentation": "https://github.com/djgragra/ha-ezviz-smart-plug",
+  "integration_type": "hub",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/djgragra/ha-ezviz-smart-plug/issues",
+  "requirements": ["pyezvizapi>=1.0.5.0"],
+  "version": "0.1.0"
+}
