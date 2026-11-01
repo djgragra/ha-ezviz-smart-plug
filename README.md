@@ -44,3 +44,5 @@ pytest
 
 ## Credits and license
 MIT, see [LICENSE](LICENSE). Built on [`pyezvizapi`](https://github.com/RenierM26/pyEzvizApi). Thanks to [@khal3d](https://github.com/khal3d/homeassistant-ezviz-smart-plug) for the original plug integration this one replaces. Not affiliated with EZVIZ or Hikvision.
+
+The EZVIZ name and logo (`custom_components/ezviz_smart_plug/brand/`) are trademarks of their owner, taken from the Home Assistant brands repository and used only to identify the service this integration works with. They are not covered by the MIT license.
