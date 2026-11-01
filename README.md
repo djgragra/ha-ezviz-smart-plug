@@ -15,6 +15,8 @@ The core Home Assistant `ezviz` integration supports cameras, lights and sirens 
 
 Not included (yet): power/energy measurement, schedules, local (LAN) control. Everything goes through the EZVIZ cloud, polled every 30 seconds.
 
+<a href="https://ko-fi.com/F8V328ADFH"><img height="36" src="https://storage.ko-fi.com/cdn/kofi5.png?v=6" alt="Buy Me a Coffee at ko-fi.com"></a>
+
 ## Installation
 ### HACS (custom repository)
 1. HACS → ⋮ → **Custom repositories** → add `https://github.com/djgragra/ha-ezviz-smart-plug`, type **Integration**.
