@@ -4,6 +4,9 @@ from __future__ import annotations
 
 import logging
 
+from homeassistant.const import CONF_URL, Platform
+from homeassistant.core import HomeAssistant
+from homeassistant.exceptions import ConfigEntryAuthFailed, ConfigEntryNotReady
 from pyezvizapi.client import EzvizClient
 from pyezvizapi.exceptions import (
     EzvizAuthTokenExpired,
@@ -13,10 +16,6 @@ from pyezvizapi.exceptions import (
     PyEzvizError,
 )
 
-from homeassistant.const import CONF_URL, Platform
-from homeassistant.core import HomeAssistant
-from homeassistant.exceptions import ConfigEntryAuthFailed, ConfigEntryNotReady
-
 from .const import CONF_RFSESSION_ID, CONF_SESSION_ID, DEFAULT_TIMEOUT
 from .coordinator import EzvizSmartPlugConfigEntry, EzvizSmartPlugCoordinator
 
@@ -25,9 +24,7 @@ _LOGGER = logging.getLogger(__name__)
 PLATFORMS: list[Platform] = [Platform.SWITCH]
 
 
-async def async_setup_entry(
-    hass: HomeAssistant, entry: EzvizSmartPlugConfigEntry
-) -> bool:
+async def async_setup_entry(hass: HomeAssistant, entry: EzvizSmartPlugConfigEntry) -> bool:
     """Set up EZVIZ Smart Plug from a config entry."""
     if not entry.data.get(CONF_SESSION_ID):
         raise ConfigEntryAuthFailed
@@ -48,9 +45,7 @@ async def async_setup_entry(
     except (InvalidURL, HTTPError, PyEzvizError) as err:
         raise ConfigEntryNotReady(f"Unable to connect to EZVIZ: {err}") from err
 
-    coordinator = EzvizSmartPlugCoordinator(
-        hass, entry, client=client, timeout=DEFAULT_TIMEOUT
-    )
+    coordinator = EzvizSmartPlugCoordinator(hass, entry, client=client, timeout=DEFAULT_TIMEOUT)
     await coordinator.async_config_entry_first_refresh()
     entry.runtime_data = coordinator
 
@@ -58,8 +53,6 @@ async def async_setup_entry(
     return True
 
 
-async def async_unload_entry(
-    hass: HomeAssistant, entry: EzvizSmartPlugConfigEntry
-) -> bool:
+async def async_unload_entry(hass: HomeAssistant, entry: EzvizSmartPlugConfigEntry) -> bool:
     """Unload a config entry."""
     return await hass.config_entries.async_unload_platforms(entry, PLATFORMS)

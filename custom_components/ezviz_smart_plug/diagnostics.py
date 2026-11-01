@@ -22,7 +22,6 @@ async def async_get_config_entry_diagnostics(
     return {
         "entry": async_redact_data(dict(entry.data), TO_REDACT),
         "plugs": [
-            async_redact_data(asdict(plug), TO_REDACT)
-            for plug in entry.runtime_data.data.values()
+            async_redact_data(asdict(plug), TO_REDACT) for plug in entry.runtime_data.data.values()
         ],
     }

@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
-from collections.abc import Mapping
 import logging
+from collections.abc import Mapping
 from typing import Any
 
+from homeassistant.config_entries import ConfigFlow, ConfigFlowResult
+from homeassistant.const import CONF_PASSWORD, CONF_URL, CONF_USERNAME
 from pyezvizapi.client import EzvizClient
 from pyezvizapi.exceptions import (
     EzvizAuthVerificationCode,
@@ -14,9 +16,6 @@ from pyezvizapi.exceptions import (
     InvalidURL,
     PyEzvizError,
 )
-
-from homeassistant.config_entries import ConfigFlow, ConfigFlowResult
-from homeassistant.const import CONF_PASSWORD, CONF_URL, CONF_USERNAME
 
 from .const import (
     CONF_RFSESSION_ID,
@@ -56,9 +55,7 @@ class EzvizSmartPlugConfigFlow(ConfigFlow, domain=DOMAIN):
     ) -> tuple[dict[str, Any] | None, str | None]:
         """Log in and return (entry data, error key)."""
         if self._client is None or sms_code is None:
-            self._client = EzvizClient(
-                self._username, self._password, self._url, DEFAULT_TIMEOUT
-            )
+            self._client = EzvizClient(self._username, self._password, self._url, DEFAULT_TIMEOUT)
         client = self._client
         try:
             token = await self.hass.async_add_executor_job(client.login, sms_code)
@@ -80,16 +77,12 @@ class EzvizSmartPlugConfigFlow(ConfigFlow, domain=DOMAIN):
     async def _async_finish(self, data: dict[str, Any]) -> ConfigFlowResult:
         """Create the entry, or update it when re-authenticating."""
         if self._reauth:
-            return self.async_update_reload_and_abort(
-                self._get_reauth_entry(), data_updates=data
-            )
+            return self.async_update_reload_and_abort(self._get_reauth_entry(), data_updates=data)
         return self.async_create_entry(title=self._username, data=data)
 
     # -- steps -----------------------------------------------------------------
 
-    async def async_step_user(
-        self, user_input: dict[str, Any] | None = None
-    ) -> ConfigFlowResult:
+    async def async_step_user(self, user_input: dict[str, Any] | None = None) -> ConfigFlowResult:
         """Handle the initial step."""
         errors: dict[str, str] = {}
 
@@ -120,9 +113,7 @@ class EzvizSmartPlugConfigFlow(ConfigFlow, domain=DOMAIN):
         )
         return self.async_show_form(step_id="user", data_schema=schema, errors=errors)
 
-    async def async_step_mfa(
-        self, user_input: dict[str, Any] | None = None
-    ) -> ConfigFlowResult:
+    async def async_step_mfa(self, user_input: dict[str, Any] | None = None) -> ConfigFlowResult:
         """Ask for the verification code sent by EZVIZ."""
         errors: dict[str, str] = {}
 
@@ -146,9 +137,7 @@ class EzvizSmartPlugConfigFlow(ConfigFlow, domain=DOMAIN):
             errors=errors,
         )
 
-    async def async_step_reauth(
-        self, entry_data: Mapping[str, Any]
-    ) -> ConfigFlowResult:
+    async def async_step_reauth(self, entry_data: Mapping[str, Any]) -> ConfigFlowResult:
         """Start re-authentication when the stored tokens expired."""
         self._reauth = True
         self._username = entry_data[CONF_USERNAME]

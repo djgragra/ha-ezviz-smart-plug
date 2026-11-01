@@ -7,6 +7,7 @@ from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
 
 import pytest
+from homeassistant.const import CONF_URL, CONF_USERNAME
 from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from custom_components.ezviz_smart_plug.const import (
@@ -14,8 +15,6 @@ from custom_components.ezviz_smart_plug.const import (
     CONF_SESSION_ID,
     DOMAIN,
 )
-
-from homeassistant.const import CONF_URL, CONF_USERNAME
 
 USERNAME = "user@example.com"
 SERIAL = "Q07320129"

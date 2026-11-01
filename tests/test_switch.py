@@ -4,16 +4,15 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from pyezvizapi.exceptions import EzvizAuthTokenExpired, PyEzvizError
 import pytest
-from pytest_homeassistant_custom_component.common import MockConfigEntry
-
-from custom_components.ezviz_smart_plug.coordinator import parse_plugs
-
 from homeassistant.config_entries import ConfigEntryState
 from homeassistant.const import STATE_OFF, STATE_ON, STATE_UNAVAILABLE
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import HomeAssistantError
+from pyezvizapi.exceptions import EzvizAuthTokenExpired, PyEzvizError
+from pytest_homeassistant_custom_component.common import MockConfigEntry
+
+from custom_components.ezviz_smart_plug.coordinator import parse_plugs
 
 from .conftest import SERIAL, make_record
 
@@ -58,15 +57,11 @@ async def test_turn_off_and_on(
     """Commands reach the cloud and the state updates."""
     await _setup(hass, config_entry)
 
-    await hass.services.async_call(
-        "switch", "turn_off", {"entity_id": ENTITY_ID}, blocking=True
-    )
+    await hass.services.async_call("switch", "turn_off", {"entity_id": ENTITY_ID}, blocking=True)
     mock_client.switch_status.assert_called_with(SERIAL, 14, False)
     assert hass.states.get(ENTITY_ID).state == STATE_OFF
 
-    await hass.services.async_call(
-        "switch", "turn_on", {"entity_id": ENTITY_ID}, blocking=True
-    )
+    await hass.services.async_call("switch", "turn_on", {"entity_id": ENTITY_ID}, blocking=True)
     mock_client.switch_status.assert_called_with(SERIAL, 14, True)
     assert hass.states.get(ENTITY_ID).state == STATE_ON
 
@@ -104,8 +99,7 @@ async def test_expired_token_starts_reauth(
 
     assert config_entry.state is ConfigEntryState.SETUP_ERROR
     assert any(
-        flow["context"]["source"] == "reauth"
-        for flow in hass.config_entries.flow.async_progress()
+        flow["context"]["source"] == "reauth" for flow in hass.config_entries.flow.async_progress()
     )
 
 

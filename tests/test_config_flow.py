@@ -4,15 +4,14 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-from pyezvizapi.exceptions import EzvizAuthVerificationCode, InvalidURL, PyEzvizError
-from pytest_homeassistant_custom_component.common import MockConfigEntry
-
-from custom_components.ezviz_smart_plug.const import DOMAIN
-
 from homeassistant import config_entries
 from homeassistant.const import CONF_PASSWORD, CONF_URL, CONF_USERNAME
 from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResultType
+from pyezvizapi.exceptions import EzvizAuthVerificationCode, InvalidURL, PyEzvizError
+from pytest_homeassistant_custom_component.common import MockConfigEntry
+
+from custom_components.ezviz_smart_plug.const import DOMAIN
 
 from .conftest import TOKEN, USERNAME
 
@@ -47,9 +46,7 @@ async def test_user_flow_success(hass: HomeAssistant, mock_client: MagicMock) ->
     assert CONF_PASSWORD not in result["data"]
 
 
-async def test_user_flow_errors_then_success(
-    hass: HomeAssistant, mock_client: MagicMock
-) -> None:
+async def test_user_flow_errors_then_success(hass: HomeAssistant, mock_client: MagicMock) -> None:
     """Errors are shown and the flow can recover."""
     result = await _start(hass)
 
@@ -79,19 +76,16 @@ async def test_user_flow_mfa(hass: HomeAssistant, mock_client: MagicMock) -> Non
 
     # wrong code
     mock_client.login.side_effect = PyEzvizError("The MFA code is invalid")
-    result = await hass.config_entries.flow.async_configure(
-        result["flow_id"], {"code": "123456"}
-    )
+    result = await hass.config_entries.flow.async_configure(result["flow_id"], {"code": "123456"})
     assert result["errors"] == {"base": "invalid_code"}
 
     # right code
     mock_client.login.side_effect = None
     mock_client.login.return_value = dict(TOKEN)
-    result = await hass.config_entries.flow.async_configure(
-        result["flow_id"], {"code": "654321"}
-    )
+    result = await hass.config_entries.flow.async_configure(result["flow_id"], {"code": "654321"})
     assert result["type"] is FlowResultType.CREATE_ENTRY
-    mock_client.login.assert_called_with(654321)
+    # setup of the new entry calls login() again: check the MFA call happened
+    mock_client.login.assert_any_call(654321)
 
 
 async def test_already_configured(
@@ -115,7 +109,9 @@ async def test_reauth(
     result = await config_entry.start_reauth_flow(hass)
     assert result["step_id"] == "reauth_confirm"
 
-    mock_client.login.return_value = {**TOKEN, "session_id": "new", "rf_session_id": "newrf"}
+    new_token = {**TOKEN, "session_id": "new", "rf_session_id": "newrf"}
+    mock_client.login.return_value = new_token
+    mock_client._token = dict(new_token)  # what the real client holds after login
     result = await hass.config_entries.flow.async_configure(
         result["flow_id"], {CONF_PASSWORD: "secret"}
     )

@@ -3,10 +3,14 @@
 from __future__ import annotations
 
 import asyncio
-from dataclasses import dataclass
 import logging
+from dataclasses import dataclass
 from typing import Any
 
+from homeassistant.config_entries import ConfigEntry
+from homeassistant.core import HomeAssistant
+from homeassistant.exceptions import ConfigEntryAuthFailed
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 from pyezvizapi.client import EzvizClient
 from pyezvizapi.constants import DeviceCatagories, DeviceSwitchType
 from pyezvizapi.exceptions import (
@@ -16,11 +20,6 @@ from pyezvizapi.exceptions import (
     InvalidURL,
     PyEzvizError,
 )
-
-from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant
-from homeassistant.exceptions import ConfigEntryAuthFailed
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .const import (
     CONF_RFSESSION_ID,
@@ -124,10 +123,7 @@ class EzvizSmartPlugCoordinator(DataUpdateCoordinator[dict[str, EzvizPlug]]):
         if not session_id or not rf_session_id:
             return
         data = self.config_entry.data
-        if (
-            data.get(CONF_SESSION_ID) == session_id
-            and data.get(CONF_RFSESSION_ID) == rf_session_id
-        ):
+        if data.get(CONF_SESSION_ID) == session_id and data.get(CONF_RFSESSION_ID) == rf_session_id:
             return
         self.hass.config_entries.async_update_entry(
             self.config_entry,

@@ -5,15 +5,14 @@ from __future__ import annotations
 from dataclasses import replace
 from typing import Any
 
-from pyezvizapi.constants import DeviceSwitchType
-from pyezvizapi.exceptions import PyEzvizError
-
 from homeassistant.components.switch import SwitchDeviceClass, SwitchEntity
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.device_registry import DeviceInfo
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
+from pyezvizapi.constants import DeviceSwitchType
+from pyezvizapi.exceptions import PyEzvizError
 
 from .const import DOMAIN, MANUFACTURER
 from .coordinator import EzvizPlug, EzvizSmartPlugConfigEntry, EzvizSmartPlugCoordinator
