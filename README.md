@@ -50,6 +50,6 @@ The EZVIZ name and logo (`custom_components/ezviz_smart_plug/brand/`) are tradem
 ## Support
 This integration is free and will stay free. If it saved you time, you can leave a tip on Ko-fi, a thank-you and nothing more. Bug reports and test results on other plug models are just as welcome: open an [issue](https://github.com/djgragra/ha-ezviz-smart-plug/issues).
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F8V328ADFH)
+<a href="https://ko-fi.com/F8V328ADFH"><img height="36" src="https://storage.ko-fi.com/cdn/kofi5.png?v=6" alt="Buy Me a Coffee at ko-fi.com"></a>
 
 *Italiano:* l'integrazione è gratuita e resta tale. Se ti è stata utile puoi lasciare una mancia su Ko-fi (pulsante qui sopra), un grazie e basta. Segnalazioni e prove su altri modelli di presa sono altrettanto gradite.
