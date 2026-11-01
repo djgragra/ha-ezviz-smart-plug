@@ -48,6 +48,8 @@ MIT, see [LICENSE](LICENSE). Built on [`pyezvizapi`](https://github.com/RenierM2
 The EZVIZ name and logo (`custom_components/ezviz_smart_plug/brand/`) are trademarks of their owner, taken from the Home Assistant brands repository and used only to identify the service this integration works with. They are not covered by the MIT license.
 
 ## Support
-This integration is free and will stay free. If it saved you time, you can leave a tip on [Ko-fi](https://ko-fi.com/onairgarage), a thank-you and nothing more. Bug reports and test results on other plug models are just as welcome: open an [issue](https://github.com/djgragra/ha-ezviz-smart-plug/issues).
+This integration is free and will stay free. If it saved you time, you can leave a tip on Ko-fi, a thank-you and nothing more. Bug reports and test results on other plug models are just as welcome: open an [issue](https://github.com/djgragra/ha-ezviz-smart-plug/issues).
 
-*Italiano:* l'integrazione è gratuita e resta tale. Se ti è stata utile puoi lasciare una mancia su [Ko-fi](https://ko-fi.com/onairgarage), un grazie e basta. Segnalazioni e prove su altri modelli di presa sono altrettanto gradite.
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F8V328ADFH)
+
+*Italiano:* l'integrazione è gratuita e resta tale. Se ti è stata utile puoi lasciare una mancia su Ko-fi (pulsante qui sopra), un grazie e basta. Segnalazioni e prove su altri modelli di presa sono altrettanto gradite.
