@@ -18,10 +18,12 @@ Not included (yet): power/energy measurement, schedules, local (LAN) control. Ev
 <a href="https://ko-fi.com/F8V328ADFH"><img height="36" src="https://storage.ko-fi.com/cdn/kofi5.png?v=6" alt="Buy Me a Coffee at ko-fi.com"></a>
 
 ## Installation
-### HACS (custom repository)
-1. HACS → ⋮ → **Custom repositories** → add `https://github.com/djgragra/ha-ezviz-smart-plug`, type **Integration**.
-2. Install **EZVIZ Smart Plug** and restart Home Assistant.
+### HACS
+1. HACS → search for **EZVIZ Smart Plug** and install it.
+2. Restart Home Assistant.
 3. Settings → Devices & services → **Add integration** → *EZVIZ Smart Plug*.
+
+If it does not show up in the search yet, add it as a custom repository: HACS → ⋮ → **Custom repositories** → `https://github.com/djgragra/ha-ezviz-smart-plug`, type **Integration**, then continue from step 1.
 
 ### Manual
 Copy `custom_components/ezviz_smart_plug` into your `config/custom_components` folder and restart.
@@ -35,7 +37,7 @@ Enter the e-mail and password of your EZVIZ app account. The API server defaults
 - If you were using the older `ezviz_plug` custom integration, this one replaces it (different domain, so entities are new).
 
 ## Italiano
-Integrazione per le **prese smart EZVIZ** (categoria "Socket" dell'app EZVIZ), tramite cloud. L'integrazione `ezviz` del core non gestisce le prese. Si installa da HACS come repository personalizzato (`https://github.com/djgragra/ha-ezviz-smart-plug`, tipo Integrazione), poi Impostazioni → Dispositivi e servizi → Aggiungi integrazione → *EZVIZ Smart Plug*. Vengono salvati solo i token di sessione, non la password; il codice di verifica (MFA) è supportato. Le prese sono rilevate per categoria, non per prefisso del seriale. Per ora solo accensione/spegnimento e stato; niente misura di potenza.
+Integrazione per le **prese smart EZVIZ** (categoria "Socket" dell'app EZVIZ), tramite cloud. L'integrazione `ezviz` del core non gestisce le prese. Si installa da HACS (cerca *EZVIZ Smart Plug*; in alternativa come repository personalizzato `https://github.com/djgragra/ha-ezviz-smart-plug`, tipo Integrazione), poi Impostazioni → Dispositivi e servizi → Aggiungi integrazione → *EZVIZ Smart Plug*. Vengono salvati solo i token di sessione, non la password; il codice di verifica (MFA) è supportato. Le prese sono rilevate per categoria, non per prefisso del seriale. Per ora solo accensione/spegnimento e stato; niente misura di potenza.
 
 ## Development
 ```bash
